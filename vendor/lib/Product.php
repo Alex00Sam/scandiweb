@@ -40,6 +40,10 @@ abstract class Product {
 
     public static function mysql()
     {
+        if (isset($_ENV['CLEARDB_DATABASE_URL'])) {
+            return new PDO($_ENV['CLEARDB_DATABASE_URL']);
+        } else {
+
         $servername = "localhost";
         $username = "root";
         $password = "mysql";
@@ -51,6 +55,7 @@ abstract class Product {
             die("Connection failed: " . $conn->connect_error);
         }
         return $conn;
+    }
     }
 
     public function getTableName(): string
