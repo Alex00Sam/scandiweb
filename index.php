@@ -15,7 +15,7 @@
             -webkit-transform: scale(2); /* Safari and Chrome */
             -o-transform: scale(2); /* Opera */
             transform: scale(2);
-            margin: 20px;
+            margin: 5px;
         }
 
         #header {
