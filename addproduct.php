@@ -151,7 +151,7 @@
 </script>
 
 <div id="header">
-    <h1>Add product</h1>
+    <h1 style="padding-left: 20px">Add product</h1>
     <div style="margin-top: 20px">
         <button id="submit_btn" type="submit" form="product_form"
         ">Save</button>
