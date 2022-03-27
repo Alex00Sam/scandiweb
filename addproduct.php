@@ -34,10 +34,6 @@
             margin: 20px 20px 20px 20px;
         }
 
-        #inline {
-            width: 100%;
-            display: flex;
-        }
 
         button {
             border: 5px solid #fd9f9f;
@@ -105,33 +101,7 @@
 </head>
 <body>
 
-<script>
-    function isFloat(n){
-        return Number(n) === n && n % 1 !== 0;
-    }
-
-    function validate() {
-        var x = document.forms["product_form"]["sku"].value;
-        if (x == "") {
-            alert ("SKU mustn't be empty!");
-            return false;
-        }
-        var x = document.forms["product_form"]["name"].value;
-        if (isFloat(x)) {
-            alert("Name mustn't be empty!");
-            return false;
-        }
-        var x = document.forms["product_form"]["price"].value;
-        if (isFloat(x)) {
-            alert("Price mustn't be empty!");
-            return false;
-        }
-
-
-    }
-</script>
-
-<script>
+<script> //jQuery script that shows/hides fields and making them required
     $(document).ready(function(){
         $('#productType').on('change', function() {
             $("#size").prop('required', false);
@@ -161,11 +131,29 @@
         });
     });
 </script>
+<!--
+<script> //an attempt to check the SKU field uniqueness. But, I'm not quite experienced in ajax queries, so it doesn't work
+    function isUnique(){
+    let sku = $("#sku").value;
+    $.ajax({
+        type: "POST",
+        url: 'isunique.php',
+        dataType: 'html',
+        data: {sku},
+        success: function(result){
+                    if(result=="false")
+                        alert('This SKU is already taken.');
+
+                }
+    }
+    });
+    }
+</script> -->
 
 <div id="header">
     <h1>Add product</h1>
     <div style="margin-top: 20px">
-        <button type="submit" form="product_form">Save</button>
+        <button type="submit" form="product_form" onsubmit="isUnique()">Save</button>
         <a href="./">
             <button>Cancel</button>
         </a>

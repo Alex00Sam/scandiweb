@@ -1,7 +1,6 @@
 <?php
 
-//namespace vendor\lib;
-
+//This Class is made to call some crucial methods from an abstract Product class. This is not the most efficient way to do this, however.
 class App extends Product
 {
     public function __construct()
@@ -22,14 +21,14 @@ class App extends Product
         if($result) {
             while ($row = $result->fetch_assoc()){
                 $category =$row['category'];
-                $obj = new $category();
+                $obj = new $category(); //Makes a Book/DVD/Furniture object based on Category field value
                 $obj->select($row);
-                array_push($a,$obj);
+                array_push($a,$obj); //loads all the  products from the database
             }
             mysqli_free_result($result);
         }
         mysqli_close($conn);
-        return $a;
+        return $a; //sends everything to RenderAll method
     }
 
     public function renderAll($array){
@@ -63,8 +62,25 @@ class App extends Product
     }
 
     public static function add($array){
-        $obj = new $array['productType']();
+        $obj = new $array['productType']();  //Makes a Book/DVD/Furniture object based on Category field value
         $obj->add($array);
+    }
+
+    public static function isUnique($value){ //Checks whether the given SKU is not present in the database
+        $conn = App::mysql();
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = 'SELECT COUNT(sku) FROM '. App::getTableName().'WHERE sku='.$value;
+        $result = $conn->query($sql);
+        if($result==1) {
+            mysqli_free_result($result);
+            mysqli_close($conn);
+            return "false";
+        }
+        mysqli_free_result($result);
+        mysqli_close($conn);
+        return "true";
     }
 
 }
