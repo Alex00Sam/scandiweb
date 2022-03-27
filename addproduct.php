@@ -129,31 +129,32 @@
                     $("#length").prop('required', true);
             }
         });
+
     });
 </script>
-<!--
-<script> //an attempt to check the SKU field uniqueness. But, I'm not quite experienced in ajax queries, so it doesn't work
-    function isUnique(){
-    let sku = $("#sku").value;
-    $.ajax({
-        type: "POST",
-        url: 'isunique.php',
-        dataType: 'html',
-        data: {sku},
-        success: function(result){
-                    if(result=="false")
-                        alert('This SKU is already taken.');
 
+<script>
+    function isUnique(str){
+        if (str.length != 0) {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("txtHint").innerHTML = this.responseText;
                 }
+            };
+            xmlhttp.open("GET", "isunique.php?q=" + str, true);
+            xmlhttp.send();
+        }
+
     }
-    });
-    }
-</script> -->
+
+
+</script>
 
 <div id="header">
     <h1>Add product</h1>
     <div style="margin-top: 20px">
-        <button type="submit" form="product_form" onsubmit="isUnique()">Save</button>
+        <button type="submit" form="product_form" ">Save</button>
         <a href="./">
             <button>Cancel</button>
         </a>
@@ -162,13 +163,14 @@
 
 
 <div class="container">
-    <form id="product_form" method="post" onsubmit="return validate()" action="save.php">
+    <form id="product_form" method="post" " action="save.php">
         <div class="row">
             <div class="col-25">
                 <label for="sku">SKU</label>
             </div>
             <div class="col-75">
-                <input type="text" id="sku" name="sku" placeholder="SKU" required>
+                <input type="text" id="sku" name="sku" placeholder="SKU" onkeyup="isUnique(this.value)" required>
+
             </div>
         </div>
         <div class="row">
@@ -223,6 +225,7 @@
             </div>
 
     </form>
+    <p><span id="txtHint"></span></p>
 </div>
 
 

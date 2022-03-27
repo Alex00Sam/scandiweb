@@ -92,6 +92,7 @@
         <?php
             require 'autoload.php';
             $book = new App();
+            $book->loadAll();
         ?>
     </div>
 </form>

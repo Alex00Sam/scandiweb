@@ -1,3 +1,3 @@
 <?php
     require 'autoload.php';
-    App::isUnique($_POST);
+    echo App::isUnique($_REQUEST['q']);

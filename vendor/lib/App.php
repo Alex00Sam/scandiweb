@@ -5,11 +5,10 @@ class App extends Product
 {
     public function __construct()
     {
-        $loaded = $this->loadAll();
-        $this->renderAll($loaded);
+
     }
 
-    public function loadAll(): array
+    public function loadAll():void
     {
         $a=[];
         $conn = $this->mysql();
@@ -28,7 +27,8 @@ class App extends Product
             mysqli_free_result($result);
         }
         mysqli_close($conn);
-        return $a; //sends everything to RenderAll method
+        $this->renderAll($a);
+        //sends everything to RenderAll method
     }
 
     public function renderAll($array){
@@ -54,7 +54,7 @@ class App extends Product
     {
         if($_POST){
             $sku_array = implode("','",$_POST['checked']);
-            $query = "DELETE FROM product WHERE sku IN ('".$sku_array."')";
+            $query = "DELETE FROM ". (new App)->getTableName()." WHERE sku IN ('".$sku_array."')";
             mysqli_query(App::mysql(), $query);
             var_dump($query);
         }
@@ -66,21 +66,19 @@ class App extends Product
         $obj->add($array);
     }
 
-    public static function isUnique($value){ //Checks whether the given SKU is not present in the database
+    public static function isUnique($value):string { //Checks whether the given SKU is present in the database
         $conn = App::mysql();
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = 'SELECT COUNT(sku) FROM '. App::getTableName().'WHERE sku='.$value;
+        $sql = "SELECT COUNT(sku) as total FROM ".(new App())->getTableName()." WHERE sku=" .$value;
         $result = $conn->query($sql);
-        if($result==1) {
-            mysqli_free_result($result);
-            mysqli_close($conn);
-            return "false";
-        }
-        mysqli_free_result($result);
+        $data =mysqli_fetch_assoc($result);
         mysqli_close($conn);
-        return "true";
+        if($data['total']==1) {
+            return "This SKU is NOT available!";
+        }
+        return "This SKU is available!";
     }
 
 }
