@@ -15,7 +15,6 @@ class Dvd extends Product
         $this->insert();
     }
 
-
     public function getSize(): int
     {
         return $this->size;
