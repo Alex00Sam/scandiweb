@@ -65,9 +65,9 @@ class Book extends Product
                     <input type="checkbox" class="delete-checkbox" name="checked[]" value="'.self::getSKU().'">'
             .'<p style="font-style: italic; text-align: center">'.
             self::getSKU()
-            .'</p><br><p style="font-weight: bold; text-align: center">'.
+            .'</p><p style="font-weight: bold; text-align: center">'.
             self::getName()
-            .'</p><br><p style="font: italic ;text-align: center">'.
+            .'</p><p style="font: italic ;text-align: center">'.
             self::getPrice()
             .' $</p><br><p style="text-align: center">'.
             self::getWeight()
