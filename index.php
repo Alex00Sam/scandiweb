@@ -7,8 +7,8 @@
             background-color: #faf0e6;
             font-family: "Segoe UI";
         }
-        input[type=checkbox]
-        {
+
+        input[type=checkbox] {
             /* Double-sized Checkboxes */
             -ms-transform: scale(2); /* IE */
             -moz-transform: scale(2); /* FF */
@@ -37,7 +37,7 @@
             font-size: 20px;
         }
 
-        .card{
+        .card {
             height: 300px;
             width: 20%;
             border: 5px solid #ffb0b0;
@@ -57,10 +57,11 @@
             font-weight: bold;
             font-family: "Segoe UI";
         }
+
         button:hover {
-            transform:scale(1.1);
-            -webkit-transform:scale(1.1);
-            -moz-transform:scale(1.1);
+            transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
         }
 
         #inline {
@@ -90,9 +91,9 @@
 <form method="post" action="delete.php" id="form">
     <div id="inline">
         <?php
-            require 'autoload.php';
-            $book = new App();
-            $book->loadAll();
+        require 'autoload.php';
+        $book = new App();
+        $book->loadAll();
         ?>
     </div>
 </form>
