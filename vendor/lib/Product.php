@@ -41,12 +41,13 @@ abstract class Product {
     public static function mysql()
     {
         if (isset($_ENV['CLEARDB_DATABASE_URL'])) {
-            $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+            /*$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
             $server = $url["host"];
             $username = $url["user"];
             $password = $url["pass"];
-            $db = substr($url["path"], 1);
-            $conn = new mysqli($server, $username, $password, $db);
+            $db = substr($url["path"], 1);*/
+
+            $conn = new mysqli('eu-cdbr-west-02.cleardb.net', 'b797fb260f1a36', 'cbbe8e16', 'heroku_db734c534a6f902');
         } else {
         $servername = "localhost";
         $username = "root";
