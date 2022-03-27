@@ -3,7 +3,6 @@
 <head>
     <style>
         body {
-            margin-left: 30px;
             background-color: #faf0e6;
             font-family: "Segoe UI";
         }
@@ -26,15 +25,6 @@
         p {
             font-size: 20px;
         }
-
-        .card {
-            height: 300px;
-            width: 20%;
-            border: 2px solid red;
-            border-radius: 5px;
-            margin: 20px 20px 20px 20px;
-        }
-
 
         button {
             border: 5px solid #fd9f9f;
@@ -72,6 +62,7 @@
         }
 
         .container {
+            margin-left: 30px;
             border-radius: 5px;
             background-color: #fcced5;
             padding: 20px;
@@ -141,11 +132,12 @@
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
+
                     document.getElementById("txtHint").innerHTML = this.responseText;
-                    if (this.responseText=="This SKU is NOT available!"){
-                        document.getElementById("submit_btn").disabled=true;
-                    } else{
-                        document.getElementById("submit_btn").disabled=false;
+                    if (this.responseText == "This SKU is NOT available!") {
+                        document.getElementById("submit_btn").disabled = true;
+                    } else {
+                        document.getElementById("submit_btn").disabled = false;
                     }
                 }
             };
@@ -171,6 +163,7 @@
 
 
 <div class="container">
+    <p style="margin: 0px"><span id="txtHint"></span>&nbsp</p>
     <form id="product_form" method="post"
     " action="save.php">
     <div class="row">
@@ -234,7 +227,6 @@
         </div>
 
         </form>
-        <p><span id="txtHint"></span></p>
     </div>
 
 
