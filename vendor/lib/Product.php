@@ -41,9 +41,13 @@ abstract class Product {
     public static function mysql()
     {
         if (isset($_ENV['CLEARDB_DATABASE_URL'])) {
-            return new PDO($_ENV['CLEARDB_DATABASE_URL']);
+            $url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+            $server = $url["host"];
+            $username = $url["user"];
+            $password = $url["pass"];
+            $db = substr($url["path"], 1);
+            $conn = new mysqli($server, $username, $password, $db);
         } else {
-
         $servername = "localhost";
         $username = "root";
         $password = "mysql";
@@ -54,8 +58,9 @@ abstract class Product {
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        return $conn;
+
     }
+        return $conn;
     }
 
     public function getTableName(): string
