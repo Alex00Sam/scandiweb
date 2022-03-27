@@ -142,6 +142,11 @@
             xmlhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     document.getElementById("txtHint").innerHTML = this.responseText;
+                    if (this.responseText=="This SKU is NOT available!"){
+                        document.getElementById("submit_btn").disabled=true;
+                    } else{
+                        document.getElementById("submit_btn").disabled=false;
+                    }
                 }
             };
             xmlhttp.open("GET", "isunique.php?q=" + str, true);
@@ -156,7 +161,7 @@
 <div id="header">
     <h1>Add product</h1>
     <div style="margin-top: 20px">
-        <button type="submit" form="product_form"
+        <button id="submit_btn" type="submit" form="product_form"
         ">Save</button>
         <a href="./">
             <button>Cancel</button>

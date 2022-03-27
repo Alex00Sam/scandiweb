@@ -74,7 +74,7 @@ class App extends Product
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT COUNT(sku) as total FROM " . (new App())->getTableName() . " WHERE sku=" . $value;
+        $sql = "SELECT COUNT(sku) as total FROM " . (new App())->getTableName() . " WHERE sku=" ."'". $value."'";
         $result = $conn->query($sql);
         $data = mysqli_fetch_assoc($result);
         mysqli_close($conn);
