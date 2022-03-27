@@ -63,9 +63,9 @@ class Book extends Product
     {
         return '<div class="card">
                     <input type="checkbox" class="delete-checkbox" name="checked[]" value="'.self::getSKU().'">'
-            .'<br><p style="font-style: italic; text-align: center">'.
+            .'<p style="font-style: italic; text-align: center">'.
             self::getSKU()
-            .'<br><p style="font-weight: bold; text-align: center">'.
+            .'</p><br><p style="font-weight: bold; text-align: center">'.
             self::getName()
             .'</p><br><p style="font: italic ;text-align: center">'.
             self::getPrice()
