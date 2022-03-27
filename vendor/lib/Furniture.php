@@ -5,7 +5,7 @@
 class Furniture extends Product
 
 {
-    protected string $category = 'furniture';
+    protected string $category = 'Furniture';
     private float $width;
     private float $height;
     private float $length;

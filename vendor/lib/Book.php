@@ -5,7 +5,7 @@
 class Book extends Product
 {
     private float $weight;
-    protected string $category = 'book';
+    protected string $category = 'Book';
 
 
     public function add($a)

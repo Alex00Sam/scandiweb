@@ -5,7 +5,7 @@
 class Dvd extends Product
 {
     private float $size;
-    protected string $category = 'dvd';
+    protected string $category = 'Dvd';
     public function add($a)
     {
         $this->setSKU($a['sku']);
