@@ -3,7 +3,7 @@
 <head>
     <style>
         body {
-            margin-left: 30px;
+
             background-color: #faf0e6;
             font-family: "Segoe UI";
         }
@@ -67,6 +67,7 @@
         #inline {
             width: 100%;
             display: flex;
+            margin-left: 30px;
         }
 
 
