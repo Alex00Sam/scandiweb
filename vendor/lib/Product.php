@@ -80,15 +80,18 @@ abstract class Product {
 
             $sql = "INSERT INTO {$this->getTableName()}(".$this->getFieldSet().") 
                     VALUES('".
-                $this->getSpecifiedValue()
-                ."','".
-                $this->getCategory()
-                ."','".
+
+
+
                 $this->getSKU()
                 ."','".
                 $this->getName()
                 ."','".
                 $this->getPrice()
+                ."','".
+                $this->getCategory()
+                ."','".
+                $this->getSpecifiedValue()
                 ."')";
        // $conn->query($sql);
         if ($conn->query($sql) === TRUE) {
