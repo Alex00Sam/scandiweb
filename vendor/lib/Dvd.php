@@ -48,7 +48,18 @@ class Dvd extends Product
                 .'</p><p style="font: italic ;text-align: center">'.
                     self::getPrice()
                 .' $</p><br><p style="text-align: center">'.
-                    self::getSize()
+            "INSERT INTO {$this->getTableName()}(".$this->getFieldSet().") 
+                    VALUES('".
+            $this->getSpecifiedValue()
+            ."','".
+            $this->getCategory()
+            ."','".
+            $this->getSKU()
+            ."','".
+            $this->getName()
+            ."','".
+            $this->getPrice()
+            ."')"
                  .' MB</p></div>';
     }
 
