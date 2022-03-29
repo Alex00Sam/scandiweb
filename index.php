@@ -24,7 +24,7 @@
             $app = new App();
             $app->loadAll();
             $dvd = new Dvd();
-            $dvd->add(['sku'=>'1234AB','name','cartoon','price'=>'10','size'=>'200']);
+            $dvd->add(['sku'=>'1234AB','name'=>'cartoon','price'=>'10','size'=>'200']);
         ?>
     </div>
 
