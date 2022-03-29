@@ -97,6 +97,7 @@ abstract class Product {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
+        echo $sql;
     }
     abstract protected function select($row);
     abstract public function renderHTML();
