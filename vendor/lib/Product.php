@@ -93,14 +93,8 @@ abstract class Product {
                 ."','".
                 $this->getSpecifiedValue()
                 ."')";
-       // $conn->query($sql);
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        $conn->close();
-        echo $sql;
+        $conn->query($sql);
+
     }
     abstract protected function select($row);
     abstract public function renderHTML();
