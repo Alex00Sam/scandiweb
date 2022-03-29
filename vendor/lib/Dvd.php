@@ -4,7 +4,7 @@
 
 class Dvd extends Product
 {
-    private float $size;
+    protected float $size;
     protected string $category = 'Dvd';
     public function add($a)
     {
@@ -15,7 +15,7 @@ class Dvd extends Product
         $this->insert();
     }
 
-    public function getSize(): int
+    public function getSize(): float
     {
         return $this->size;
     }
@@ -24,30 +24,6 @@ class Dvd extends Product
     }
 
 
-
-    protected function insert() {
-        $conn = $this->mysql();
-        // TODO: Implement insert() method.
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $sql = "INSERT INTO ".
-            self::getTableName()
-            ."(sku, name,price,size,category) VALUES('".
-            self::getSKU()
-            ."','".
-            self::getName()
-            ."','".
-            self::getPrice()
-            ."','".
-            self::getSize()
-            ."','".
-            self::getCategory()
-            ."')";
-
-        $conn->query($sql) === TRUE;
-        $conn->close();
-    }
     protected function select($row)
     {
         if($row) {
@@ -61,23 +37,24 @@ class Dvd extends Product
     }
 
 
-
-
     public function renderHTML(): string
     {
         return '<div class="card">
                     <input type="checkbox" class="delete-checkbox" name="checked[]" value="'.self::getSKU().'">'
                 .'<br><p style="font-style: italic; text-align: center">'.
-                self::getSKU()
+                    self::getSKU()
                 .'</p><p style="font-weight: bold; text-align: center">'.
                     self::getName()
                 .'</p><p style="font: italic ;text-align: center">'.
-                self::getPrice()
-             .' $</p><br><p style="text-align: center">'.
+                    self::getPrice()
+                .' $</p><br><p style="text-align: center">'.
                     self::getSize()
                  .' MB</p></div>';
     }
 
 
-
+    public function getSpecifiedValue():float
+    {
+        return $this->getSize();
+    }
 }

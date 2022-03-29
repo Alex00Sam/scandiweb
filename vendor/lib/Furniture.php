@@ -5,10 +5,10 @@
 class Furniture extends Product
 
 {
+    protected float $height;
+    protected float $width;
+    protected float $length;
     protected string $category = 'Furniture';
-    private float $width;
-    private float $height;
-    private float $length;
 
 
     public function add($a)
@@ -44,39 +44,6 @@ class Furniture extends Product
         $this->height = $value;
     }
 
-    protected function insert()
-    {
-        $conn = $this->mysql();
-        // TODO: Implement insert() method.
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $sql = "INSERT INTO ".
-            self::getTableName()
-            ."(sku, name,price,height,width,length,category) VALUES('".
-            self::getSKU()
-            ."','".
-            self::getName()
-            ."','".
-            self::getPrice()
-            ."','".
-            self::getHeight()
-            ."','".
-            self::getWidth()
-            ."','".
-            self::getLength()
-            ."','".
-            self::getCategory()
-            ."')";
-
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
-        }
-        $conn->close();
-    }
     protected function select($row)
     {
         if($row) {
@@ -109,5 +76,8 @@ class Furniture extends Product
             .'</p></div>';
     }
 
-
+    public function getSpecifiedValue():string
+    {
+        return $this->getHeight()."','".$this->getWidth()."','".$this->getLength();
+    }
 }

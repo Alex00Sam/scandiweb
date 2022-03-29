@@ -1,3 +1,3 @@
 <?php
     require 'autoload.php';
-    echo App::isUnique($_REQUEST['q']);
+    echo App::isUnique("sku",$_REQUEST['q']);

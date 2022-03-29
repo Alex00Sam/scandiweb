@@ -36,11 +36,6 @@ class App extends Product
         foreach ($array as $a) echo $a->renderHTML();
     }
 
-    protected function insert()
-    {
-        // TODO: Implement insert() method.
-    }
-
     protected function select($row)
     {
         // TODO: Implement select() method.
@@ -68,13 +63,13 @@ class App extends Product
         $obj->add($array);
     }
 
-    public static function isUnique($value): string
+    public static function isUnique($field,$value): string
     { //Checks whether the given SKU is present in the database
         $conn = App::mysql();
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "SELECT COUNT(sku) as total FROM " . (new App())->getTableName() . " WHERE sku=" ."'". $value."'";
+        $sql = "SELECT COUNT({$field}) as total FROM " . (new App())->getTableName() . " WHERE {$field}=" ."'". $value."'";
         $result = $conn->query($sql);
         $data = mysqli_fetch_assoc($result);
         mysqli_close($conn);
@@ -84,4 +79,8 @@ class App extends Product
         return "This SKU is available!";
     }
 
+    public function getSpecifiedValue()
+    {
+        // TODO: Implement getSpecifiedValue() method.
+    }
 }

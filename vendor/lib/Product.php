@@ -3,12 +3,11 @@
 //namespace vendor\lib;
 
 abstract class Product {
-    protected string $table = 'product';
+    protected static string $table = 'product';
+    protected string $sku;
+    protected string $name;
+    protected float $price;
     protected string $category;
-    private string $sku;
-    private string $name;
-    private float $price;
-
     public function getSKU(): string
     {
         return $this->sku;
@@ -47,7 +46,6 @@ abstract class Product {
             $password = $url["pass"];
             $db = substr($url["path"], 1);
             $conn = new mysqli($server,$username,$password,$db);
-          //  $conn = new mysqli('eu-cdbr-west-02.cleardb.net', 'b797fb260f1a36', 'cbbe8e16', 'heroku_db734c534a6f902');
         } else {
         $servername = "localhost";
         $username = "root";
@@ -66,13 +64,39 @@ abstract class Product {
 
     public function getTableName(): string
     {
-        return $this->table;
+        return self::$table;
     }
 
-    abstract protected function insert();
+    protected function getFieldSet():string {
+        return implode(",",array_keys(get_object_vars($this)));
+    }
+
+    protected function insert() {
+            $conn = $this->mysql();
+            // TODO: Implement insert() method.
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $sql = "INSERT INTO {$this->getTableName()}(".$this->getFieldSet().") 
+                    VALUES('".
+                $this->getSpecifiedValue()
+                ."','".
+                $this->getCategory()
+                ."','".
+                $this->getSKU()
+                ."','".
+                $this->getName()
+                ."','".
+                $this->getPrice()
+                ."')";
+        $conn->query($sql);
+        $conn->close();
+    }
     abstract protected function select($row);
     abstract public function renderHTML();
 
+    abstract public function getSpecifiedValue();
 
 
 

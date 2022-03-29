@@ -4,7 +4,7 @@
 
 class Book extends Product
 {
-    private float $weight;
+    protected float $weight;
     protected string $category = 'Book';
 
 
@@ -25,29 +25,6 @@ class Book extends Product
         $this->weight = $value;
     }
 
-    protected function insert()
-    {
-        $conn = $this->mysql();
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        $sql = "INSERT INTO ".
-            self::getTableName()
-            ."(sku, name,price,weight,category) VALUES('".
-            self::getSKU()
-            ."','".
-            self::getName()
-            ."','".
-            self::getPrice()
-            ."','".
-            self::getWeight()
-            ."','".
-            self::getCategory()
-            ."')";
-
-        $conn->query($sql);
-        $conn->close();
-    }
     protected function select($row)
     {
         if ($row) {
@@ -72,5 +49,9 @@ class Book extends Product
             .' $</p><br><p style="text-align: center">'.
             self::getWeight()
             .' g</p></div>';
+    }
+    public function getSpecifiedValue():float
+    {
+        return $this->getWeight();
     }
 }
