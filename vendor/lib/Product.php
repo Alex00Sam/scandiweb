@@ -90,7 +90,12 @@ abstract class Product {
                 ."','".
                 $this->getPrice()
                 ."')";
-        $conn->query($sql);
+       // $conn->query($sql);
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
         $conn->close();
     }
     abstract protected function select($row);
